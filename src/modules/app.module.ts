@@ -1,15 +1,12 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
-import { CatsController } from './cats.controller';
-import { WxappApiController } from './wxapi/wxappapi.controller';
+import { WxappApiModule } from './wxappapi.module'
 
 @Module({
-  modules: [],
+  modules: [WxappApiModule],
   controllers: 
   [
     AppController,
-    CatsController,
-    WxappApiController,
   ],
   components: [],
 })
