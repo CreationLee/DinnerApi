@@ -13,6 +13,6 @@ export class WxappApiController {
 
     @Get('setUserSessionKey')
     setUserSessionKey(@Query() query, @Response() res) {
-      return  this.wxappApiService.setUserSessionKey(query, res);
+        this.wxappApiService.setUserSessionKey(query, res);
     }
 }
