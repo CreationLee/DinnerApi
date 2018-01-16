@@ -6,7 +6,6 @@ import {
 } from '@nestjs/common';
 import { WxappApiService } from './wxappapi.service';
 
-
 @Controller('WxAppApi')
 export class WxappApiController {
     constructor(private readonly wxappApiService : WxappApiService) {}
