@@ -12,8 +12,7 @@ export class WxappApiController {
     constructor(private readonly wxappApiService : WxappApiService) {}
 
     @Get('setUserSessionKey')
-    async setUserSessionKey(@Query() query, @Response() res) {
+    setUserSessionKey(@Query() query, @Response() res) {
         this.wxappApiService.setUserSessionKey(query, res);
-        console.log(query.code);
     }
 }
