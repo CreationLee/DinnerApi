@@ -7,9 +7,8 @@ export class RestaurantController {
     constructor(private readonly restaurantService : RestaurantService) {}
 
     @Get(':id')
-    async find(@Param() params, @Response() res): Promise<Restaurant> {
-        let re = await this.restaurantService.findOne(params.id);  
-        console.log('re',re);
-        return re;
+    async find(@Param() params, @Response() res) {
+        let restaurant = await this.restaurantService.findOne(params.id);  
+        res.status(200).send(restaurant); 
     }
 }

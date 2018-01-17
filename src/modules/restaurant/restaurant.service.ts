@@ -11,9 +11,7 @@ export class RestaurantService {
       ) {}
 
     async findOne(@Param() params) {
-        let restaurant = await this.restaurantRepository.findOneById(params);
-        console.log('restaurant',restaurant);
-        return restaurant;
+        return await this.restaurantRepository.findOneById(params);
     }
 
 }
