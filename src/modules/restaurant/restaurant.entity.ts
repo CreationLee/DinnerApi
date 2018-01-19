@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import { DishCategories } from '../category/category.entity';
 
 @Entity('restaurants')
 export class Restaurant {
@@ -16,5 +17,10 @@ export class Restaurant {
 
   @Column('int')
   table_num: number;
+
+  @OneToMany(type => DishCategories, DishCategories => DishCategories.restaurant, {
+    eager: true
+  })
+  dishCategories: DishCategories[];
   
 }

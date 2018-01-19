@@ -1,5 +1,6 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany, ManyToOne, JoinColumn } from 'typeorm';
 import { Dish } from '../dish/dish.entity';
+import { Restaurant } from '../restaurant/restaurant.entity';
 
 @Entity('dish_categories')
 export class DishCategories {
@@ -12,7 +13,13 @@ export class DishCategories {
   @Column('text')
   name: string;
 
-  @OneToMany(type => Dish, Dish => Dish.dishCategories)
+  @OneToMany(type => Dish, Dish => Dish.dishCategories, {
+    eager: true
+  })
   dish: Dish[];
+
+  @ManyToOne(type => Restaurant, Restaurant => Restaurant.dishCategories)
+  @JoinColumn({ name: 'restaurant_id' })
+  restaurant: Restaurant[];
 
 }

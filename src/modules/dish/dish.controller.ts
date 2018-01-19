@@ -8,7 +8,7 @@ export class DishController {
     @Get(':id')
     async findDishes(@Param() params, @Response() res) {
         let dishes = await this.dishService.findDishes(params.id);
-        res.status(200).send(dishes);
+        res.status(200).send(dishes.dishCategories);
     }
 
 }
