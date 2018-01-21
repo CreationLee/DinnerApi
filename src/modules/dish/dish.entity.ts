@@ -21,7 +21,7 @@ export class Dish {
   @Column('int')
   is_recommend: number;
 
-  @ManyToOne(type => DishCategories, DishCategories => DishCategories.dish)
+  @ManyToOne(type => DishCategories, DishCategories => DishCategories.dishes)
   @JoinColumn({ name: 'dish_catgory_id' })
   dishCategories: DishCategories;
   
