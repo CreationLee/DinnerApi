@@ -1,8 +1,18 @@
 import { Component, Query, Response} from '@nestjs/common';
+import { SessionKeyDto } from './session-key.dto';
+import { Customer } from '../customer/customer.interface';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { Customer as CustomerEntity } from '../customer/customer.entity';
 
 
 @Component()
 export class WxappApiService {
+    constructor(
+      @InjectRepository(CustomerEntity)
+      private readonly customerRepository: Repository<CustomerEntity>
+    ){}
+
     private https = require('https');
 
     setUserSessionKey(@Query() query, @Response() res) {
@@ -21,6 +31,18 @@ export class WxappApiService {
         });
       
       });
+
+    }
+
+    async checkSignature(sessionKeyDto: SessionKeyDto){
+        var WXBizDataCrypt = require('../../utils/WXBizDataCrypt');
+        let pc = new WXBizDataCrypt('wxe0fdae328482d4ba',sessionKeyDto.rd_session);
+        var customer = pc.decryptData(sessionKeyDto.encryptedData, sessionKeyDto.iv);
+        
+
+    }
+
+    async checkUser(customer: Customer){
 
     }
 }
