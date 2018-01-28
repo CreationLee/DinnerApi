@@ -20,6 +20,7 @@
     "redis": "^2.7.1",
     "reflect-metadata": "^0.1.10",
     "rxjs": "^5.4.0",
+    "silly-datetime": "^0.1.2",
     "typeorm": "^0.1.11",
     "typescript": "^2.5.2"
   },

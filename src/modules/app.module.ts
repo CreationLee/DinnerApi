@@ -5,6 +5,7 @@ import { AppController } from './app.controller';
 import { WxappApiModule } from './wxappapi.module';
 import { RestaurantModule } from './restaurant.module';
 import { DishModule } from './dish.module';
+import { OrderModule } from './order.module';
 
 @Module({
   imports: [TypeOrmModule.forRoot()],
@@ -12,7 +13,8 @@ import { DishModule } from './dish.module';
     TypeOrmModule.forRoot(),
     WxappApiModule,
     RestaurantModule,
-    DishModule
+    DishModule,
+    OrderModule
   ],
   controllers: 
   [

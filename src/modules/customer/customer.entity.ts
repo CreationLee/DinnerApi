@@ -11,4 +11,7 @@ export class Customer {
     @Column()
     info: String
 
+    @Column()
+    create_at: String
+
 }

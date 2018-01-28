@@ -55,9 +55,13 @@ export class WxappApiService {
     }
 
     async saveUser(customer: Customer){
+      let myDate = require('silly-datetime');
+      var time = myDate.format(new Date(), 'YYYY-MM-DD HH:mm:ss');
+
       return await this.customerRepository.save({
         openid: customer.openId,
-        info: JSON.stringify(customer)
+        info: JSON.stringify(customer),
+        create_at: time
       });
     }
 }
