@@ -37,12 +37,27 @@ export class WxappApiService {
     async checkSignature(sessionKeyDto: SessionKeyDto){
         var WXBizDataCrypt = require('../../utils/WXBizDataCrypt');
         let pc = new WXBizDataCrypt('wxe0fdae328482d4ba',sessionKeyDto.rd_session);
-        var customer = pc.decryptData(sessionKeyDto.encryptedData, sessionKeyDto.iv);
-        
+        let customer = pc.decryptData(sessionKeyDto.encryptedData, sessionKeyDto.iv);
+        let str = JSON.stringify(customer) 
 
+        let result = await this.checkUser(customer);
+
+        if(result == undefined) {
+          let save = await this.saveUser(customer);
+          return save;
+        }
+
+        return result;
     }
 
     async checkUser(customer: Customer){
+      return await this.customerRepository.findOne({openid: customer.openId});
+    }
 
+    async saveUser(customer: Customer){
+      return await this.customerRepository.save({
+        openid: customer.openId,
+        info: JSON.stringify(customer)
+      });
     }
 }

@@ -20,7 +20,7 @@ export class WxappApiController {
     }
 
     @Post('checkSignature')
-    async checkSignature(@Body() sessionKeyDto: SessionKeyDto, @Res() res: Response){
+    checkSignature(@Body() sessionKeyDto: SessionKeyDto, @Res() res: Response){
         this.wxappApiService.checkSignature(sessionKeyDto);
 
         
