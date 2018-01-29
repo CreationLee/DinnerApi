@@ -5,10 +5,10 @@ export class Customer {
     @PrimaryGeneratedColumn()
     id: number
 
-    @Column()
+    @Column('text')
     openid: String
 
-    @Column()
+    @Column('text')
     info: String
 
     @Column()
