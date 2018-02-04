@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn, OneToMany } from 'typeorm';
+import { Order } from '../order/order.entity';
 
 @Entity('customers')
 export class Customer {
@@ -13,5 +14,8 @@ export class Customer {
 
     @Column()
     create_at: String
+
+    @OneToMany(type => Order)
+    orders: Order[];
 
 }

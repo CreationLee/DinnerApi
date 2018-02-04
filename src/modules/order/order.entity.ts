@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany, ManyToOne, JoinColumn } from 'typeorm';
+import { Customer } from '../customer/customer.entity';
 
 @Entity('orders')
 export class Order {
@@ -35,4 +36,7 @@ export class Order {
     @Column()
     create_at: String;
 
+    @ManyToOne(type => Customer, Customer => Customer.orders)
+    @JoinColumn({ name: 'restaurant_id' })
+    customer: Customer;
 }
