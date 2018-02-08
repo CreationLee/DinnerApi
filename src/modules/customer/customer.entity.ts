@@ -15,7 +15,7 @@ export class Customer {
     @Column()
     create_at: String
 
-    @OneToMany(type => Order)
+    @OneToMany(type => Order, Order => Order.customer)
     orders: Order[];
 
 }

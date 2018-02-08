@@ -1,8 +1,14 @@
 import { Param, Component, Inject } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import {  } from './customer.entity';
+import { Repository } from 'typeorm';
+import { Customer } from './customer.entity';
 
 @Component()
 export class CustomerService {
-    constructor(){}
+    constructor(
+        @InjectRepository(Customer)
+        private readonly customerRepository: Repository<Customer>,
+    ){}
+
+    
 }
