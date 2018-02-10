@@ -1,5 +1,6 @@
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany, ManyToOne, JoinColumn } from 'typeorm';
 import { Customer } from '../customer/customer.entity';
+import { OrderDish } from '../orderDish/orderDish.entity';
 
 @Entity('orders')
 export class Order {
@@ -39,4 +40,9 @@ export class Order {
     @ManyToOne(type => Customer, Customer => Customer.orders)
     @JoinColumn({ name: 'restaurant_id' })
     customer: Customer;
+
+    @OneToMany(type => OrderDish, OrderDish=>OrderDish.order,{
+        eager: true
+    })
+    orderDishes: OrderDish[];
 }

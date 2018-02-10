@@ -21,9 +21,7 @@ export class OrderService {
     }
 
     async saveOrder(order: orderIntrface){
-        let myDate = require('silly-datetime');
-        var time = myDate.format(new Date(), 'YYYY-MM-DD HH:mm:ss');
-        order.create_at = time;
+        order.create_at = new Date().getTime().toString();
         
         try{
           return await this.orderRepository.save(order);
@@ -38,4 +36,9 @@ export class OrderService {
             this.orderDishRepository.save(dish);
         });
     }
+
+    async findUserOrder(@Param() params){
+        return await this.orderRepository.find({customer_id: params});
+    }
+
 }
