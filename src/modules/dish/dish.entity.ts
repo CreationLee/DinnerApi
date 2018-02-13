@@ -1,5 +1,6 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 'typeorm';
 import { DishCategories } from '../category/category.entity';
+import { OrderDish } from '../orderDish/orderDish.entity';
 
 @Entity('dishes')
 export class Dish {
@@ -24,5 +25,6 @@ export class Dish {
   @ManyToOne(type => DishCategories, DishCategories => DishCategories.dishes)
   @JoinColumn({ name: 'dish_catgory_id' })
   dishCategories: DishCategories;
+
   
 }

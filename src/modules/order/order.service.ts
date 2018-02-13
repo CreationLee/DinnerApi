@@ -38,7 +38,10 @@ export class OrderService {
     }
 
     async findUserOrder(@Param() params){
-        return await this.orderRepository.find({customer_id: params});
+        return await this.orderRepository.find({
+            where: {customer_id: params},
+            order: { "create_at": "DESC" },
+        });
     }
 
 }
