@@ -38,10 +38,41 @@ export class OrderService {
     }
 
     async findUserOrder(@Param() params){
-        return await this.orderRepository.find({
+        let orders = await this.orderRepository.find({
             where: {customer_id: params},
             order: { "create_at": "DESC" },
         });
+
+        return await this.sortOrder(orders);
+    }
+
+    sortOrder(orders){
+        let that = this;
+        let userOrders = {todayOrders: [], allOrders: []};
+        let timeStamp = this.getTodayTimeStamp();
+        orders.forEach(function(order,i){
+            order.revertedTime = that.timestampTotime(order.create_at);
+            if(order.create_at > timeStamp){
+                userOrders.todayOrders.push(order);           
+            }
+        });
+        userOrders.allOrders =  orders;
+
+        return userOrders;
+    }
+
+    getTodayTimeStamp(){
+        let time = new Date();
+        time.setHours(0);
+        time.setMinutes(0);
+        time.setSeconds(0);
+        time.setMilliseconds(0);
+        return time.getTime().toString();
+    }
+
+    timestampTotime(date: any){
+        var newDate = new Date(parseInt(date));
+        return newDate.toLocaleString();
     }
 
 }
